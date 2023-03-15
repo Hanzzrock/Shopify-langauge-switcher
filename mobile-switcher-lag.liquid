@@ -1,0 +1,38 @@
+<div class="menu-drawer__menu-item list-menu__item link link--text focus-inset language-switchex">
+  {% form 'localization' %}
+    <select name="language_code" class="language-switcher" onchange="this.form.submit()">
+      {% for language in localization.available_languages %}
+        <option class="list-lag" value="{{ language.iso_code }}"
+          {%- if language == localization.language %} selected="selected"{% endif %}
+        >
+          {{ language.endonym_name }}
+        </option>
+      {% endfor %}
+    </select>
+  {% endform %}
+</div>
+
+
+
+<style>
+  select.language-switcher {
+    padding: 10px;
+    background: no-repeat;
+    color: #fff;
+    border: 1px solid #fff;
+    font-size: 1.5rem;
+}
+  option.list-lag {
+    BACKGROUND: #000;
+    padding: 10px !IMPORTANT;
+}
+
+option.list-lag[selected="selected"] {
+    background: #458eff;
+}
+  select.language-switcher:focus-visible {
+    outline: none;
+    outline-offset: 0;
+    box-shadow: none;
+}
+</style>
