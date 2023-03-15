@@ -1,0 +1,88 @@
+ <div class="country-list page-width">
+<div class="country-lag">
+     {% if localization.available_languages.size > 1 %}
+  <localization-form>
+    {% form 'localization' %}
+      <div class="disclosure">
+        <button type="button" class="disclosure__button" aria-expanded="false" aria-controls="LanguageList">
+          {{ localization.language.endonym_name | capitalize }} 
+
+          <svg aria-hidden="true" focusable="false" class="icon icon-caret" viewBox="0 0 10 6">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
+</path></svg>
+        </button>
+
+        <ul id="LanguageList" role="list" class="disclosure__list" hidden>
+          {% for language in localization.available_languages %}
+            <li class="disclosure__item" tabindex="-1">
+              <a href="#"{% if language.iso_code == localization.language.iso_code %} aria-current="true"{% endif %} hreflang="{{ language.iso_code }}" lang="{{ language.iso_code }}" data-value="{{ language.iso_code }}">
+                {{ language.endonym_name | capitalize }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+
+        <input type="hidden" name="language_code" value="{{ localization.language.iso_code }}">
+      </div>
+    {% endform %}
+  </localization-form>
+{% endif %}
+            </div>
+</div>
+<style>
+button.disclosure__button {
+    border: none;
+    font-weight: 400;
+    font-size: 15px;
+    color: #fff;
+    font-family: 'Oswald';
+    text-transform: uppercase;
+    background: #458eff;
+}
+
+.country-lag {
+    float: right;
+    position: relative;
+    background: #458eff;
+    color: #fff;
+    font-family: 'Oswald';
+}
+
+ul#LanguageList {
+    list-style: none;
+    padding-left: 15px;
+    padding-top: 0;
+    padding-bottom: 0;
+    min-height: 0;
+    max-width: 0;
+    scroll-padding: 0;
+}
+
+li.disclosure__item a {
+    text-decoration: none;
+    color: #fff;
+    text-transform: uppercase;
+}
+  header.page-width.header--has-menu .disclosure {
+    display: none;
+}
+
+button.disclosure__button svg {
+    height: 7px;
+    position: relative;
+    left: 5px;
+    top: 2px;
+}
+   @media screen and (max-width: 990px) {
+   .country-lag {
+    display:none;
+}
+  } 
+@media screen and (min-width: 992px) {
+.country-lag {
+ 
+    top: -40px;
+ 
+}  
+}
+</style>
